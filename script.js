@@ -14,13 +14,10 @@ let isPainting = false;
 let lineWidth = 5;
 let startX;
 let startY;
+let mode = 'pen'; // 'pen' or 'eraser'
 
-toolbar.addEventListener('click', e => {
-    if (e.target.id === 'clear'){
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    }
-
+document.getElementById('clear').addEventListener('click', () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 });
 
 const draw = (e) => {
@@ -50,4 +47,28 @@ canvas.addEventListener('mouseup', e => {
 
 canvas.addEventListener('mousemove', draw);
 
+const gridTool = document.getElementById("gridTool");
 
+let gridMode = 0;
+
+gridTool.addEventListener("click", () => {
+
+    gridMode = (gridMode + 1) % 3;
+
+    if(gridMode === 0){
+        canvas.style.backgroundImage = "none";
+    }
+
+    if(gridMode === 1){
+        canvas.style.backgroundImage =
+            "radial-gradient(#d0d0d0 1px, transparent 1px)";
+        canvas.style.backgroundSize = "25px 25px";
+    }
+
+    if(gridMode === 2){
+        canvas.style.backgroundImage =
+            `linear-gradient(#ddd 1px, transparent 1px),
+             linear-gradient(90deg, #ddd 1px, transparent 1px)`;
+        canvas.style.backgroundSize = "25px 25px";
+    }
+});

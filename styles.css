@@ -2,17 +2,68 @@ html {
     margin: 0;
     padding: 0;
     height: 100%;
+    overflow: hidden;
 }
 body{
        margin: 0;
     padding: 0;
     height: 100%;
 }
+#lineWidth{
+    width:48px;
+    height:4px;
+    cursor:pointer;
+}
+#stroke{
+    width:48px;
+    height:48px;
+    border:none;
+      box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius:12px;
+    cursor:pointer;
+    background:none;
+    overflow:hidden;
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.08),
+        inset 0 0 0 1px #e5e7eb;
+    transition:.2s;
+}
+
+img{
+     transform: rotate(45deg);
+}
+#stroke:hover{
+    transform:translateY(-2px);
+    box-shadow:
+        0 6px 16px rgba(0,0,0,.12),
+        inset 0 0 0 1px #d1d5db;
+}
+
 
 body {
     display: flex;
-    color: white;
+    margin: 0;
+    padding: 0;
+    color: rgb(0, 0, 0);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+#clear{
+    height: 48px;
+    width: 48px;
+    background-color: rgb(235, 235, 235);
+    border: none;
+    border-radius: 10px;
+    
+}
+#clear:hover{
+    height: 50px;
+    width: 50px;
+    transition-duration: 100ms;
+    background-color:  rgb(235, 235, 235);
+  
+    border-radius: 10px;
+    
 }
 
 .container {
@@ -20,13 +71,67 @@ body {
     min-height: 100vh;
     width: 100%;
 }
+.pen svg{
+   height: 28px;
+   width: 28px;
+   padding: 10px;
+   border-radius: 10px;
+   border: none;
 
+   background-color: rgb(235, 235, 235);
+}
+.pen svg:hover{
+   height: 30px;
+   width: 30px;
+   padding: 10px;
+   border-radius: 10px;
+   border: none;
+
+   background-color: rgb(235, 235, 235);
+}
+.grid{
+     height: 28px;
+   width: 28px;
+   padding: 10px;
+   border-radius: 10px;
+   border: none;
+
+   background-color: rgb(235, 235, 235);
+
+}
+.grid:hover{
+     height: 30px;
+   width: 30px;
+   padding: 10px;
+   border-radius: 10px;
+   border: none;
+
+   background-color: rgb(235, 235, 235);
+
+}
+.grid img{
+    height: 28px;
+    transform: rotate(45deg);
+}
 #toolbar {
-    background: #000000;
+    border: 2px solid rgb(243, 243, 243);
+    border-radius: 10px;
     display: flex;
+    margin-left: 25px;
     flex-direction: column;
-    width: 10%;
-    min-width: 120px;
+    width: min-content;
+    gap: 16px;
+   top: 50%;
+position: fixed;
+    transform: translateY(-50%);
+     box-shadow:
+        0 8px 24px rgba(0,0,0,.08),
+        0 2px 8px rgba(0,0,0,.05);
+    background-color: #efefefbe;
+   align-items: center;
+   justify-content: center;
     padding: 10px;
-    height: 100vh;
+    height: min-content
+    
+   
 }
