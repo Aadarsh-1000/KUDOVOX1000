@@ -7,8 +7,8 @@ const ctx = canvas.getContext('2d');
 const canvasOffsetX = canvas.offsetLeft;
 const canvasOffsetY = canvas.offsetTop;
 
-canvas.width = window.innerWidth - canvasOffsetX;
-canvas.height = window.innerHeight - canvasOffsetY;
+canvas.width = 1000;
+canvas.height = 600;
 
 let isPainting = false;
 let lineWidth = 5;
@@ -85,4 +85,49 @@ document.getElementById("pdfTool").addEventListener("click", () => {
     link.href = canvas.toDataURL();
 
     link.click();
+});
+
+document.getElementById("c1").addEventListener("click", () => {
+    canvas.style.backgroundImage = "none";
+        canvas.style.backgroundColor="honeydew";
+});
+document.getElementById("c2").addEventListener("click", () => {
+    canvas.style.backgroundImage = "none";
+    canvas.style.backgroundColor="cyan";
+});
+document.getElementById("c3").addEventListener("click", () => {
+    canvas.style.backgroundImage = "none";
+    canvas.style.backgroundColor="red";
+});
+document.getElementById("c4").addEventListener("click", () => {
+    canvas.style.backgroundImage = "none";
+    canvas.style.backgroundColor="green";
+});
+document.getElementById("c5").addEventListener("click", () => {
+    canvas.style.backgroundImage = "none";
+    canvas.style.backgroundColor="rgb(152, 148, 148)";
+});
+document.getElementById("c6").addEventListener("click", () => {
+    canvas.style.backgroundImage = "none";
+    canvas.style.backgroundColor="rgb(90, 90, 90)";
+});
+document.getElementById("c7").addEventListener("click", () => {
+    canvas.style.backgroundImage = "none";
+    canvas.style.backgroundColor="rgb(255, 255, 255)";
+});
+document.getElementById("c8").addEventListener("click", () => {
+    canvas.style.backgroundImage = "none";
+    canvas.style.backgroundColor="black";
+});
+document.getElementById("c9").addEventListener("click", () => {
+    canvas.style.backgroundImage = 'linear-gradient(135deg, #FF512F 0%, #DD2476 100%)';
+});
+document.getElementById("c10").addEventListener("click", () => {
+    canvas.style.backgroundImage = 'linear-gradient(135deg, #00C6FF 0%, #0072FF 100%)';
+});
+document.getElementById("c11").addEventListener("click", () => {
+    canvas.style.backgroundImage = 'linear-gradient(135deg, #6A11CB 0%, #2575FC 100%)';
+});
+document.getElementById("c12").addEventListener("click", () => {
+    canvas.style.backgroundImage = 'linear-gradient(135deg, #11998E 0%, #38EF7D 100%)';
 });
