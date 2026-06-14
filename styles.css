@@ -98,7 +98,32 @@ body {
 
    background-color: rgb(235, 235, 235);
 
+
+
 }
+
+#drawing-board{
+    border: 2px solid grey;
+   
+}
+.drawing-board{
+    display:flex;
+    border: 2px solid black;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+}
+.difscr svg{
+    height: 28px;
+   width: 28px;
+   padding: 10px;
+   border-radius: 10px;
+   border: none;
+
+   background-color: rgb(235, 235, 235);
+}
+
+
 .grid:hover{
      height: 30px;
    width: 30px;
