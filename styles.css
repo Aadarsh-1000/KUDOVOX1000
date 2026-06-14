@@ -104,54 +104,131 @@ body {
   grid-template-columns: repeat(4, 1fr); 
   grid-template-rows: max-content; 
   align-content: start; 
+  align-items: center;
+  justify-content: center;
   gap: 10px; 
   border: 2px solid rgba(128, 128, 128, 0.048);
   text-align: center;
-  padding: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 5px;
   min-height: 100vh; 
-  background-color: #f5f5f5; 
+  background-color: #ffffff; 
 }
 #bg h2 {
   grid-column: 1 / -1; 
   margin: 10px; 
-  font-size: 15px;
+  
+  font-size: 12px;
   font-family: "Poppins";
-  color: #333;
+  color: #33333376;
 }
 #bg p{
       grid-column: 1 / -1; 
   margin-bottom: 5px; 
   font-size: 12px;
-  
-   font-family: "space Grotesk";
+  text-align: left;
+  font-weight: 600;
+   font-family: "Poppins";
 
  
-  color: #333;
+  color: #7A828A;
 
+}
+.circle{
+    background-color: #0072FF;
+    border-radius: 50%;
+    height: 10px;
+    margin: 10px;
+    width: 10px;
+
+}
+.header{
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    font-family: "poppins";
+    font-weight: 550;
+    color: rgb(20, 20, 20);
+    font-size: 20px;
 }
 #bg .p1{
-      grid-column: 1 / -1; 
-  margin: 5px; 
+     grid-column: 1 / -1; 
+  margin-bottom: 5px; 
+  text-align: left;
   font-size: 12px;
-    font-family: "space Grotesk";
+  font-weight: 600;
+   font-family: "Poppins";
 
-  color: #333;
+ 
+  color: #7A828A;
 }
+.exp{
+        grid-column: 1 / -1; 
+  margin: 5px;
+  font-size: 12px;
+    font-family: "Poppins";
+
+  color: #3333336f;
+}
+hr {
+  grid-column: 1 / -1;      
+  width: 100%;              
+             
+  
+         
+}
+
 #bg .p2{
       grid-column: 1 / -1; 
-  margin: 5px; 
+      text-align: left;
+  margin-bottom: 5px; 
   font-size: 12px;
-    font-family: "space Grotesk";
+  font-weight: 600;
+   font-family: "Poppins";
 
-  color: #333;
+ 
+  color: #7A828A;
+}
+.edit{
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+}
+
+#mouse{
+    opacity: 0.2;
+    margin-left: 0;
+    transform: rotate(0deg);
+}
+
+h3{
+      grid-column: 1 / -1; 
+  margin-top: 5px; 
+
+  padding: 10px 12px;
+  background-color: #EEF2FF;
+  border-radius: 10px;
+  font-weight: 450;
+  color: #6366F1;
+  font-size: 12px;
+    font-family: "Poppins";
+
+ 
+
+}
+#gridd  {
+    transform: rotate(-45deg);
 }
 #drawing-board{
+    border-radius: 6px;
+
     border: 2px solid rgba(70, 67, 67, 0.162);
    
 }
 .drawing-board{
     display:flex;
-
+border-radius: 10px;
     justify-content:center;
     align-items:center;
     width:100%;
