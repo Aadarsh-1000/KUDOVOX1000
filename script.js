@@ -131,3 +131,24 @@ document.getElementById("c11").addEventListener("click", () => {
 document.getElementById("c12").addEventListener("click", () => {
     canvas.style.backgroundImage = 'linear-gradient(135deg, #11998E 0%, #38EF7D 100%)';
 });
+
+const emojiBtn = document.getElementById("emoji");
+const emojiPanel = document.getElementById("emoji-panel");
+
+emojiBtn.addEventListener("click", () => {
+    emojiPanel.classList.toggle("show");
+}); 
+document.querySelectorAll(".emoji").forEach(emoji => {
+    emoji.addEventListener("click", () => {
+
+        ctx.font = "40px Arial";
+        ctx.fillText(
+            emoji.textContent,
+            canvas.width / 2,
+            canvas.height / 2
+        );
+
+        document.getElementById("emoji-panel")
+            .classList.remove("show");
+    });
+});

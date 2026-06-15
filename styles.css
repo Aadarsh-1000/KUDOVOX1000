@@ -9,6 +9,57 @@ body{
     padding: 0;
     height: 100%;
 }
+.emoji-panel{
+ margin-left: 120px;
+ margin-top: 25%;
+    position: absolute;
+    display: none;
+    background-color: beige;
+    height: min-content;
+    width: min-content;
+    padding: 10px 12px;
+    
+       grid-template-columns:repeat(2, 1fr);
+    border-radius: 10px;
+    
+}
+.emoji-panel.show{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+.emoji{
+    cursor:pointer;
+    padding: 6px;
+    
+
+    font-size:24px;
+}
+.emoji:hover{
+    border-radius: 10px;
+    background-color: #cd73136c;
+}
+#emoji{
+      height: 28px;
+   width: 28px;
+   
+   padding: 10px;
+   border-radius: 10px;
+   border: none;
+    transform: rotate(0deg);
+   background-color: rgb(235, 235, 235);
+
+}
+#emoji:hover{
+      height: 30px;
+   width: 30px;
+   padding: 10px;
+   border-radius: 10px;
+   border: none;
+    transform: rotate(0deg);
+   background-color: rgb(235, 235, 235);
+
+}
 #lineWidth{
     width:48px;
     height:4px;
