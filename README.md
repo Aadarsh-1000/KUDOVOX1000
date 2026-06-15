@@ -1,6 +1,7 @@
 # Kudovox
 -------
 > Kudovox is a simple drawign app made using html css and js
+
 > It is a simple drawing tool you can you to draw stuff..
 
 -------
@@ -19,6 +20,7 @@ KUDOVOX/
 -----
 ## Credits
 > I got the svgs from [svg repo](https://www.svgrepo.com/)
+
 > I learnt how to make the white board part from a tutorial...
 
 ## Conslusion
