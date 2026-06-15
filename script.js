@@ -152,3 +152,4 @@ document.querySelectorAll(".emoji").forEach(emoji => {
             .classList.remove("show");
     });
 });
+
