@@ -132,24 +132,81 @@ document.getElementById("c12").addEventListener("click", () => {
     canvas.style.backgroundImage = 'linear-gradient(135deg, #11998E 0%, #38EF7D 100%)';
 });
 
-const emojiBtn = document.getElementById("emoji");
-const emojiPanel = document.getElementById("emoji-panel");
+const textLayer = document.getElementById("textLayer");
 
-emojiBtn.addEventListener("click", () => {
-    emojiPanel.classList.toggle("show");
-}); 
-document.querySelectorAll(".emoji").forEach(emoji => {
-    emoji.addEventListener("click", () => {
+let textMode = false;
 
-        ctx.font = "40px Arial";
-        ctx.fillText(
-            emoji.textContent,
-            canvas.width / 2,
-            canvas.height / 2
-        );
-
-        document.getElementById("emoji-panel")
-            .classList.remove("show");
-    });
+document.getElementById("textTool").addEventListener("click", () => {
+    textMode = true;
 });
 
+canvas.addEventListener("click", (e) => {
+
+    if(!textMode) return;
+
+    const rect = canvas.getBoundingClientRect();
+
+    const box = document.createElement("div");
+
+    box.className = "textBox";
+    box.contentEditable = true;
+    box.innerText = "Type here";
+
+    box.style.left = (e.clientX - rect.left) + "px";
+    box.style.top = (e.clientY - rect.top) + "px";
+
+    textLayer.appendChild(box);
+
+    box.focus();
+
+    makeDraggable(box);
+
+    textMode = false;
+});
+canvas.addEventListener('mousedown', (e) => {
+
+    if(textMode) return;
+
+    isPainting = true;
+
+    const rect = canvas.getBoundingClientRect();
+
+    startX = e.clientX - rect.left;
+    startY = e.clientY - rect.top;
+
+    ctx.beginPath();
+    ctx.moveTo(startX, startY);
+});
+
+function makeDraggable(element){
+
+    let dragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    element.addEventListener("mousedown",(e)=>{
+
+        if(document.activeElement === element) return;
+
+        dragging = true;
+
+        offsetX = e.offsetX;
+        offsetY = e.offsetY;
+    });
+
+    document.addEventListener("mousemove",(e)=>{
+
+        if(!dragging) return;
+
+        element.style.left =
+            (e.pageX - offsetX) + "px";
+
+        element.style.top =
+            (e.pageY - offsetY) + "px";
+    });
+
+    document.addEventListener("mouseup",()=>{
+
+        dragging = false;
+    });
+}
