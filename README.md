@@ -1,5 +1,9 @@
-# Kudovox
+# Kudovox - Your lightweight browser drawing board
 -------
+<img width="1912" height="912" alt="image" src="https://github.com/user-attachments/assets/8501d575-b245-4082-92a2-3a3b570c7e40" />
+
+
+
 > Kudovox is a simple drawing browser based web-app for users to draw on, It is meant for desktops and laptops, tablets etc...
 
 > It supports free hand drawing
@@ -13,7 +17,7 @@
 > Kudovox focuses on simplicity and lightweightness it doesnt use any login or signup so it is easy to use for drawing sketches brainstroming etc....
 
 -------
-
+<img width="1907" height="910" alt="image" src="https://github.com/user-attachments/assets/5446126a-dc39-44de-bf21-625ee8781c5c" />
 ## Usecases
 > Users can brainstrorm, draw sketches(not very detailed), or just have fun drawing...
 
