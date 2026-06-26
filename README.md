@@ -1,5 +1,7 @@
 # Kudovox
 -------
+
+
 > Kudovox is a simple drawing browser based web-app for users to draw on, It is meant for desktops and laptops, tablets etc...
 
 > It supports free hand drawing
@@ -9,7 +11,7 @@
 > A clear canvas and Grid tool are included
 
 > Pen colors and brish sizing as included as well.
-
+                                                               
 > Kudovox focuses on simplicity and lightweightness it doesnt use any login or signup so it is easy to use for drawing sketches brainstroming etc....
 
 -------

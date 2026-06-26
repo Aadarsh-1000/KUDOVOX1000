@@ -11,6 +11,14 @@ body {
 
     height: 100%;
 }
+.drawing-board {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 100vh;
+}
 
 #lineWidth {
     width: 48px;
@@ -78,6 +86,7 @@ h4 {
 
 .drawing-board {
     overflow: hidden;
+     overflow:hidden;
 }
 
 button {
@@ -334,7 +343,9 @@ h3 {
 
 #drawing-board {
     border-radius: 6px;
-    overflow: hidden;
+    border:none;
+    width: 100%;
+    display:block;
     border: 2px solid rgba(70, 67, 67, 0.162);
 
 }
@@ -342,6 +353,7 @@ h3 {
 .drawing-board {
     display: flex;
     border-radius: 10px;
+     overflow:hidden;
     justify-content: center;
     align-items: center;
     width: 100%;
