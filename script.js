@@ -1,212 +1,235 @@
-const canvas = document.getElementById('drawing-board');
-const toolbar = document.getElementById('toolbar');
-const strokeInput = document.getElementById('stroke');
-const lineWidthInput = document.getElementById('lineWidth');
-const ctx = canvas.getContext('2d');
+// ======================
+// ELEMENTS
+// ======================
 
-const canvasOffsetX = canvas.offsetLeft;
-const canvasOffsetY = canvas.offsetTop;
+const strokeInput = document.getElementById("stroke");
+const lineWidthInput = document.getElementById("lineWidth");
+const canvasEl = document.getElementById("drawing-board");
+const board = document.querySelector(".drawing-board");
 
-canvas.width = 1000;
-canvas.height = 600;
+const fontSelect = document.getElementById("font");
+const fontSizeSlider = document.getElementById("fontsize");
 
-let isPainting = false;
-let lineWidth = 5;
-let startX;
-let startY;
-let mode = 'pen';
+const canvas = new fabric.Canvas("drawing-board");
 
-document.getElementById('clear').addEventListener('click', () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-});
+// ======================
+// CANVAS SIZE
+// ======================
 
-const draw = (e) => {
-    if (!isPainting) {
-        return;
-    }
-    ctx.strokeStyle = strokeInput.value || '#000000';
-    ctx.lineWidth = parseInt(lineWidthInput.value, 10) || 5;
-    ctx.lineCap = 'round';
-
-    const rect = canvas.getBoundingClientRect();
-    ctx.lineTo(
-        e.clientX - rect.left,
-        e.clientY - rect.top
-    );
-    ctx.stroke();
+function resizeCanvas() {
+    canvas.setWidth(board.clientWidth - 40);
+    canvas.setHeight(window.innerHeight - 40);
+    canvas.renderAll();
 }
-canvas.addEventListener('mousedown', (e) => {
-    isPainting = true;
-    startX = e.clientX;
-    startY = e.clientY;
-    ctx.beginPath();
-    
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+// ======================
+// DRAW SETTINGS
+// ======================
+
+canvas.isDrawingMode = true;
+canvas.freeDrawingBrush.color = strokeInput.value;
+canvas.freeDrawingBrush.width = parseInt(lineWidthInput.value);
+
+strokeInput.addEventListener("input", () => {
+
+    canvas.freeDrawingBrush.color = strokeInput.value;
+
+    const obj = canvas.getActiveObject();
+
+    if (obj && obj.type === "i-text") {
+        obj.set("fill", strokeInput.value);
+        canvas.renderAll();
+    }
 });
 
-canvas.addEventListener('mouseup', e => {
-    isPainting = false;
-    ctx.stroke();
-    ctx.beginPath();
+lineWidthInput.addEventListener("input", () => {
+    canvas.freeDrawingBrush.width = parseInt(lineWidthInput.value);
 });
 
-canvas.addEventListener('mousemove', draw);
+// ======================
+// PEN TOOL
+// ======================
 
-const gridTool = document.getElementById("gridtool");
+document.getElementById("penn").addEventListener("click", () => {
+
+    canvas.isDrawingMode = true;
+
+    canvas.discardActiveObject();
+    canvas.requestRenderAll();
+});
+
+// ======================
+// TEXT TOOL
+// ======================
+
+document.getElementById("textTool").addEventListener("click", () => {
+
+    canvas.isDrawingMode = false;
+
+    const text = new fabric.IText("Double click to edit", {
+        left: canvas.getWidth() / 2,
+        top: canvas.getHeight() / 2,
+        originX: "center",
+        originY: "center",
+        fontSize: 32,
+        fontFamily: "Poppins",
+        fill: strokeInput.value
+    });
+
+    canvas.add(text);
+    canvas.setActiveObject(text);
+
+    text.enterEditing();
+    text.selectAll();
+});
+
+// ======================
+// FONT CONTROLS
+// ======================
+
+fontSelect.addEventListener("change", async function () {
+
+    const obj = canvas.getActiveObject();
+
+    if (!obj) return;
+
+    await document.fonts.load(`32px "${this.value}"`);
+
+    obj.set({
+        fontFamily: this.value
+    });
+
+    canvas.requestRenderAll();
+});
+
+fontSizeSlider.addEventListener("input", function () {
+
+    const obj = canvas.getActiveObject();
+
+    if (!obj) return;
+
+    obj.set("fontSize", parseInt(this.value));
+    canvas.renderAll();
+});
+
+// ======================
+// GRID TOOL
+// ======================
 
 let gridMode = 0;
 
-gridTool.addEventListener("click", () => {
+document.getElementById("gridtool").addEventListener("click", () => {
 
     gridMode = (gridMode + 1) % 3;
 
-    if (gridMode === 0) {
-        canvas.style.backgroundImage = "none";
-    }
+    switch (gridMode) {
 
-    if (gridMode === 1) {
-        canvas.style.backgroundImage =
-            "radial-gradient(#d0d0d0 1px, transparent 1px)";
-        canvas.style.backgroundSize = "25px 25px";
-    }
+        case 0:
+            canvasEl.style.backgroundImage = "none";
+            canvasEl.style.backgroundColor = "white";
+            break;
 
-    if (gridMode === 2) {
-        canvas.style.backgroundImage =
-            `linear-gradient(#ddd 1px, transparent 1px),
-                linear-gradient(90deg, #ddd 1px, transparent 1px)`;
-        canvas.style.backgroundSize = "25px 25px";
-    }
+        case 1:
+            canvasEl.style.backgroundImage =
+                "radial-gradient(#d0d0d0 1px, transparent 1px)";
+            canvasEl.style.backgroundSize = "25px 25px";
+            break;
 
+        case 2:
+            canvasEl.style.backgroundImage =
+                `linear-gradient(#ddd 1px, transparent 1px),
+                 linear-gradient(90deg,#ddd 1px,transparent 1px)`;
+            canvasEl.style.backgroundSize = "25px 25px";
+            break;
+    }
 });
+
+// ======================
+// CLEAR
+// ======================
+
+document.getElementById("clear").addEventListener("click", () => {
+
+    canvas.clear();
+
+    canvas.backgroundColor = "white";
+
+    canvas.isDrawingMode = true;
+    canvas.freeDrawingBrush.color = strokeInput.value;
+    canvas.freeDrawingBrush.width = parseInt(lineWidthInput.value);
+
+    canvas.renderAll();
+});
+
+// ======================
+// EXPORT
+// ======================
+
 document.getElementById("pdfTool").addEventListener("click", () => {
 
     const link = document.createElement("a");
 
     link.download = "Kudovox.png";
-    link.href = canvas.toDataURL();
+
+    link.href = canvas.toDataURL({
+        format: "png"
+    });
 
     link.click();
 });
 
-document.getElementById("c1").addEventListener("click", () => {
-    canvas.style.backgroundImage = "none";
-        canvas.style.backgroundColor="honeydew";
-});
-document.getElementById("c2").addEventListener("click", () => {
-    canvas.style.backgroundImage = "none";
-    canvas.style.backgroundColor="cyan";
-});
-document.getElementById("c3").addEventListener("click", () => {
-    canvas.style.backgroundImage = "none";
-    canvas.style.backgroundColor="red";
-});
-document.getElementById("c4").addEventListener("click", () => {
-    canvas.style.backgroundImage = "none";
-    canvas.style.backgroundColor="green";
-});
-document.getElementById("c5").addEventListener("click", () => {
-    canvas.style.backgroundImage = "none";
-    canvas.style.backgroundColor="rgb(152, 148, 148)";
-});
-document.getElementById("c6").addEventListener("click", () => {
-    canvas.style.backgroundImage = "none";
-    canvas.style.backgroundColor="rgb(90, 90, 90)";
-});
-document.getElementById("c7").addEventListener("click", () => {
-    canvas.style.backgroundImage = "none";
-    canvas.style.backgroundColor="rgb(255, 255, 255)";
-});
-document.getElementById("c8").addEventListener("click", () => {
-    canvas.style.backgroundImage = "none";
-    canvas.style.backgroundColor="black";
-});
-document.getElementById("c9").addEventListener("click", () => {
-    canvas.style.backgroundImage = 'linear-gradient(135deg, #FF512F 0%, #DD2476 100%)';
-});
-document.getElementById("c10").addEventListener("click", () => {
-    canvas.style.backgroundImage = 'linear-gradient(135deg, #00C6FF 0%, #0072FF 100%)';
-});
-document.getElementById("c11").addEventListener("click", () => {
-    canvas.style.backgroundImage = 'linear-gradient(135deg, #6A11CB 0%, #2575FC 100%)';
-});
-document.getElementById("c12").addEventListener("click", () => {
-    canvas.style.backgroundImage = 'linear-gradient(135deg, #11998E 0%, #38EF7D 100%)';
-});
+// ======================
+// BACKGROUND COLORS
+// ======================
 
-const textLayer = document.getElementById("textLayer");
+function setBg(color) {
 
-let textMode = false;
-
-document.getElementById("textTool").addEventListener("click", () => {
-    textMode = true;
-});
-
-canvas.addEventListener("click", (e) => {
-
-    if(!textMode) return;
-
-    const rect = canvas.getBoundingClientRect();
-
-    const box = document.createElement("div");
-
-    box.className = "textBox";
-    box.contentEditable = true;
-    box.innerText = "Type here";
-
-    box.style.left = (e.clientX - rect.left) + "px";
-    box.style.top = (e.clientY - rect.top) + "px";
-
-    textLayer.appendChild(box);
-
-    box.focus();
-
-    makeDraggable(box);
-
-    textMode = false;
-});
-canvas.addEventListener('mousedown', (e) => {
-
-    if(textMode) return;
-
-    isPainting = true;
-
-    const rect = canvas.getBoundingClientRect();
-
-    startX = e.clientX - rect.left;
-    startY = e.clientY - rect.top;
-
-    ctx.beginPath();
-    ctx.moveTo(startX, startY);
-});
-
-function makeDraggable(element){
-
-    let dragging = false;
-    let offsetX = 0;
-    let offsetY = 0;
-
-    element.addEventListener("mousedown",(e)=>{
-
-        if(document.activeElement === element) return;
-
-        dragging = true;
-
-        offsetX = e.offsetX;
-        offsetY = e.offsetY;
-    });
-
-    document.addEventListener("mousemove",(e)=>{
-
-        if(!dragging) return;
-
-        element.style.left =
-            (e.pageX - offsetX) + "px";
-
-        element.style.top =
-            (e.pageY - offsetY) + "px";
-    });
-
-    document.addEventListener("mouseup",()=>{
-
-        dragging = false;
-    });
+    canvas.backgroundColor = color;
+    canvas.renderAll();
 }
+
+document.getElementById("c1").onclick = () => setBg("honeydew");
+document.getElementById("c2").onclick = () => setBg("cyan");
+document.getElementById("c3").onclick = () => setBg("red");
+document.getElementById("c4").onclick = () => setBg("green");
+document.getElementById("c5").onclick = () => setBg("rgb(152,148,148)");
+document.getElementById("c6").onclick = () => setBg("rgb(90,90,90)");
+document.getElementById("c7").onclick = () => setBg("white");
+document.getElementById("c8").onclick = () => setBg("black");
+
+// ======================
+// GRADIENT BACKGROUNDS
+// ======================
+
+document.getElementById("c9").onclick = () => {
+    canvasEl.style.background =
+        "linear-gradient(135deg,#FF512F 0%,#DD2476 100%)";
+};
+
+document.getElementById("c10").onclick = () => {
+    canvasEl.style.background =
+        "linear-gradient(135deg,#00C6FF 0%,#0072FF 100%)";
+};
+
+document.getElementById("c11").onclick = () => {
+    canvasEl.style.background =
+        "linear-gradient(135deg,#6A11CB 0%,#2575FC 100%)";
+};
+
+document.getElementById("c12").onclick = () => {
+    canvasEl.style.background =
+        "linear-gradient(135deg,#11998E 0%,#38EF7D 100%)";
+};
+const bg = document.getElementById("bg");
+document.getElementById("closesidebar").addEventListener("click", () => {
+        if(bg.style.display === "none"){
+            bg.style.display = "grid"
+        }
+        else{
+            bg.style.display = "none";
+        }
+         setTimeout(resizeCanvas, 50);
+});
