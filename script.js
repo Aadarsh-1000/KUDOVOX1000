@@ -39,13 +39,9 @@ width.addEventListener("input", ()=> {
 });
 document.getElementById("penn").addEventListener("click", () => {
     canvas.isDrawingMode = true;
-    // canvas.discardActiveObject();
-    // canvas.requestRenderAll();
+ 
 });
-function setbg(color){
-    canvas.backgroundColor = color;
-    canvas.renderAll();
-}
+
 document.getElementById("c1").onclick = () => setbg("Honeydew");
 document.getElementById("c2").onclick = () => setbg("cyan");
 document.getElementById("c3").onclick = () => setbg("red");
@@ -56,24 +52,47 @@ document.getElementById("c7").onclick = () => setbg("white");
 document.getElementById("c8").onclick = () => setbg("black");
 
 document.getElementById("c9").addEventListener("click", () => {
-     clearCanvasBackground();
+     canvas.backgroundColor = null;
+    canvas.renderAll();
+
+    canvasEl.style.backgroundImage = "none";
+    canvasEl.style.backgroundColor = "transparent";
 canvasEl.style.background = "linear-gradient(135deg,#FF512F 0%,#DD2476 100%)";
 });
+
 function setbg(color) {
-    clearCanvasBackground();
-    canvas.backgroundColor = color;
-    canvas.renderAll();
+    canvasEl.style.background = "none";
+    canvasEl.style.backgroundImage = "none";
+    canvasEl.style.backgroundColor = "transparent";
+    canvas.backgroundColor = null;
+    canvas.setBackgroundColor(color, canvas.renderAll.bind(canvas));
 }
+
+
+
 document.getElementById("c10").addEventListener("click", () => {
-     clearCanvasBackground();
+       canvas.backgroundColor = null;
+    canvas.renderAll();
+    canvasEl.style.backgroundImage = "none";
+    canvasEl.style.backgroundColor = "transparent";
  canvasEl.style.background = "linear-gradient(135deg,#00C6FF 0%,#0072FF 100%)";});
+
+
 document.getElementById("c11").addEventListener("click", () => {
-     clearCanvasBackground();
+      canvas.backgroundColor = null;
+    canvas.renderAll();
+
+    canvasEl.style.backgroundImage = "none";
+    canvasEl.style.backgroundColor = "transparent";
     canvasEl.style.background = "linear-gradient(135deg,#6A11CB 0%,#2575FC 100%)";
 });
 
 document.getElementById("c12").addEventListener("click", () => {
-     clearCanvasBackground();
+      canvas.backgroundColor = null;
+    canvas.renderAll();
+
+    canvasEl.style.backgroundImage = "none";
+    canvasEl.style.backgroundColor = "transparent";
     canvasEl.style.background ="linear-gradient(135deg,#11998E 0%,#38EF7D 100%)";
 });
 
@@ -101,12 +120,7 @@ document.getElementById("closesidebar").addEventListener("click", ()=> {
 });
 
  document.getElementById("clear").addEventListener("click", () => {
-    canvas.clear();
-    canvas.backgroundColor = "white";
-     canvas.isDrawingMode = true;
-    canvas.freeDrawingBrush.color = stroke.value;
-     canvas.freeDrawingBrush.width = parseInt(width.value);
-    canvas.renderAll();
+   window.location.reload();
  });
  document.getElementById("textTool").addEventListener("click", () => {
         canvas.isDrawingMode = false;
@@ -146,31 +160,3 @@ document.getElementById("closesidebar").addEventListener("click", ()=> {
     canvasEl.style.backgroundImage = "";
     canvasEl.style.backgroundColor = "";
 }
-let grid = 0;
-
-document.getElementById("gridtool").addEventListener("click", () => {
-    grid = (grid + 1) % 3;
-
-     switch (grid) {
-
-        case 0:
-          canvasEl.style.background = "white";
-    canvasEl.style.backgroundImage = "none";
-        break;
-
-        case 1:
-            canvasEl.style.backgroundImage =
-                "radial-gradient(#d0d0d0 1px, transparent 1px)";
-             canvasEl.style.backgroundSize = "25px 25px";
-            break;
-
-        case 2:
-            canvasEl.style.backgroundImage = `
-                 linear-gradient(#ddd 1px, transparent 1px),
-                linear-gradient(90deg,#ddd 1px,transparent 1px)
-            `;
-             canvasEl.style.backgroundSize = "25px 25px";
-            break;
-    }
-
-});
