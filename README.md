@@ -31,8 +31,7 @@
 KUDOVOX/
 |                            ---
 ├── click.png                   |
-├── close.png                   |
-├── Grid-svg-repo.svgs          |------[My images and svg]
+├── close.png                   |------[My images and svg]
 ├── pen-square-svgrepo.svg      |
 ├── text-svgrepo.svg            |
 │                            ---
