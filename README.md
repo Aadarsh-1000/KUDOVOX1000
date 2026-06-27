@@ -2,7 +2,8 @@
 -------
 
 
-<img width="1912" height="912" alt="image" src="https://github.com/user-attachments/assets/8501d575-b245-4082-92a2-3a3b570c7e40" />
+<img width="1918" height="862" alt="image" src="https://github.com/user-attachments/assets/6a2d25c7-e8c0-4161-95e8-2bce5b4a6130" />
+
 
 
  
@@ -19,7 +20,8 @@
 > Kudovox focuses on simplicity and lightweightness it doesnt use any login or signup so it is easy to use for drawing sketches brainstroming etc....
 
 -------
-<img width="1907" height="910" alt="image" src="https://github.com/user-attachments/assets/5446126a-dc39-44de-bf21-625ee8781c5c" />
+<img width="1918" height="862" alt="image" src="https://github.com/user-attachments/assets/7b43edfd-b851-4a79-9e6d-5ebbb7018556" />
+
 ## Usecases
 > Users can brainstrorm, draw sketches(not very detailed), or just have fun drawing...
 
