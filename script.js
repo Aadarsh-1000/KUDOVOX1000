@@ -54,8 +54,8 @@ document.getElementById("c8").onclick = () => setbg("black");
 document.getElementById("c9").addEventListener("click", () => {
      canvas.backgroundColor = null;
     canvas.renderAll();
-
-    canvasEl.style.backgroundImage = "none";
+ 
+     canvasEl.style.backgroundImage = "none";
     canvasEl.style.backgroundColor = "transparent";
 canvasEl.style.background = "linear-gradient(135deg,#FF512F 0%,#DD2476 100%)";
 });
